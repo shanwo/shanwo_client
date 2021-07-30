@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["chunk-2d0d9fa4"],{"6a47":function(t,e,a){"use strict";a.r(e);var s=a("231d"),n={data:()=>({}),methods:{},created(){Object(s.d)(1,"/share")}},c=a("2877"),d=Object(c.a)(n,(function(){var t=this.$createElement;return(this._self._c||t)("div",{staticClass:"share"},[this._v("分享")])}),[],!1,null,null,null);e.default=d.exports}}]);
