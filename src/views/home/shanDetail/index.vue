@@ -40,6 +40,14 @@
 			</div>
 		</div>
 		<!-- 闪页中间链接 -->
+    <div class="position_a_view"
+      :style="{ width: details.center_schema.width + 'px', height: details.center_schema.height + 'px', left: details.center_schema.coordinate_x + 'px', top: details.center_schema.coordinate_y + 'px'}"
+    >
+      <div class="center_btn_item" v-for="(item, index) in details.center_data" :key="index">
+        <img :src="item.image" alt="" :style="{  }">
+        <span>{{ item.content }}</span>
+      </div>
+    </div>
 		<!-- 闪页底部按钮 -->
 	</div>
 </template>

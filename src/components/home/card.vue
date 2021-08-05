@@ -1,6 +1,6 @@
 <template>
   <div class="content_view">
-    <div class="item_view" v-for="(itemUser, indexUser) in list" :key="indexUser" @click="toDetail" :style="{backgroundImage:'url(' + itemUser.background + ')', backgroundRepeat:'no-repeat', backgroundPosition:'center center', backgroundSize: '100% 100%'}">
+    <div class="item_view" v-for="(itemUser, indexUser) in list" :key="indexUser" @click="toDetail(itemUser)" :style="{backgroundImage:'url(' + itemUser.background + ')', backgroundRepeat:'no-repeat', backgroundPosition:'center center', backgroundSize: '100% 100%'}">
       <!-- 用户图片 -->
       <!-- 背景蒙层 -->
       <div class="item_view_bg item_user_info" :class="'item_bg_' + indexUser % 4"></div>
@@ -34,8 +34,8 @@
 		mounted() {
 		},
     methods: {
-      toDetail() {
-        this.$router.push('/shanDetail')
+      toDetail(item) {
+        this.$router.push(`/shanDetail?sort_id=${item.id}`)
       }
     }
   }
