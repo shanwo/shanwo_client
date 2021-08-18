@@ -1,3 +1,5 @@
+import httpRequest from "@/utils/httpRequest";
+import apis from "@/api/api.js";
 const shanDetail = {
   state: {
     details: {
@@ -8,48 +10,48 @@ const shanDetail = {
       preview: "https://cdn.shanwo.cc/local/picture/2021/06/ec763a1279b.jpg",
       background: "https://cdn.shanwo.cc/local/picture/2021/06/ec763a1279b.jpg",
       head_schema: {
-        width: "375",
-        height: "192",
-        coordinate_x: "0",
-        coordinate_y: "74",
+        width: "375px",
+        height: "192px",
+        coordinate_x: "0px",
+        coordinate_y: "74px",
         avatar: {
-          width: "88",
-          height: "88",
-          coordinate_x: "143",
-          coordinate_y: "0",
-          radius: "44",
+          width: "88px",
+          height: "88px",
+          coordinate_x: "143px",
+          coordinate_y: "0px",
+          radius: "44px",
         },
         badge: {
-          width: "78.67",
-          height: "94.67",
-          coordinate_x: "120",
-          coordinate_y: "40",
+          width: "78.67px",
+          height: "94.67px",
+          coordinate_x: "120px",
+          coordinate_y: "40px",
           radius: "12px",
         },
         pendant: {
-          width: "78.67",
-          height: "94.67",
-          coordinate_x: "120",
-          coordinate_y: "40",
+          width: "78.67px",
+          height: "94.67px",
+          coordinate_x: "120px",
+          coordinate_y: "40px",
           radius: "12px",
         },
         nickname: {
-          size: "22",
+          size: "22px",
           color: "#F2F2F2",
-          coordinate_x: "146",
-          coordinate_y: "100",
+          coordinate_x: "146px",
+          coordinate_y: "100px",
           text_align: "center",
-          width: "82",
-          height: "22",
+          width: "82px",
+          height: "22px",
         },
         signature: {
-          size: "18",
+          size: "18px",
           color: "#E8E7E7",
-          coordinate_x: "120",
-          coordinate_y: "132",
+          coordinate_x: "120px",
+          coordinate_y: "132px",
           text_align: "center",
-          width: "133",
-          height: "18",
+          width: "133px",
+          height: "18px",
         },
       },
       head_data: {
@@ -60,17 +62,20 @@ const shanDetail = {
         signature: "中国著名女演员",
       },
       center_schema: {
-        width: "328",
-        height: "320",
-        coordinate_x: "24",
-        coordinate_y: "253",
-        spacing: "2",
-        size: "6.67",
+        width: "328px",
+        height: "320px",
+        coordinate_x: "24px",
+        coordinate_y: "253px",
+        spacing: "16px",
+        size: "6.67px",
         color: "#FDDFB1",
-        count: "16",
+        count: "16px",
         button: {
-          coordinate_x: "120",
-          coordinate_y: "40",
+          coordinate_x: "120px",
+          coordinate_y: "40px",
+          height: "60px",
+          text_align: "center",
+          width: "328px",
         },
       },
       center_data: [
@@ -98,16 +103,42 @@ const shanDetail = {
           url: "https://www.kuaishou.com ",
           id: 3,
         },
+        {
+          url: "https://user.qzone.qq.com/83117850 ",
+          image: "https://cdn.shanwo.cc/local/picture/2021/06/ec763130211.png",
+          content: "我的QQ空间",
+          id: 6,
+        },
+        {
+          url: "https://weibo.com/83117850 ",
+          image: "https://cdn.shanwo.cc/local/picture/2021/06/ec76322bb95.png",
+          content: "我的微博",
+          id: 1,
+        },
+        {
+          content: "抖音",
+          image: "https://cdn.shanwo.cc/local/picture/2021/06/ec763156084.png",
+          url: "https://www.douyin.com ",
+          id: 2,
+        },
+        {
+          content: "快手",
+          image: "https://cdn.shanwo.cc/local/picture/2021/06/ec76317b5c2.png",
+          url: "https://www.kuaishou.com ",
+          id: 3,
+        },
       ],
       bottom_schema: {
-        width: "78.67",
-        height: "94.67",
-        coordinate_x: "120",
-        coordinate_y: "40",
-        spacing: "2",
+        width: "100%",
+        height: "40",
+        coordinate_x: "0px",
+        coordinate_y: "600px",
+        spacing: "28px",
         icon: {
           coordinate_x: "120",
           coordinate_y: "40",
+          height: "40px",
+          width: "40px"
         },
       },
       bottom_data: [
@@ -139,8 +170,10 @@ const shanDetail = {
   mutations: {},
   actions: {
     getShanDetail(context, id) {
-
-    }
+      httpRequest.myAjax(`${apis.templateInfo}?id=${id}`, "GET", {}, (res) => {
+        console.log(res);
+      });
+    },
   },
 };
-export default shanDetail
+export default shanDetail;

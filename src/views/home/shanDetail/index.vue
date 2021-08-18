@@ -20,35 +20,45 @@
 			</div>
 		</Header>
 		<!-- 闪页详情 -->
-		<!-- 闪页北京 -->
+		<!-- 闪页背景 -->
 		<div class="shan_bg" :style="{backgroundImage:'url(' + details.background + ')', backgroundRepeat:'no-repeat', backgroundPosition:'center center'}"></div>
 		<!-- 闪页头部 -->
 		<div class="position_a_view"
-			:style="{ width: details.head_schema.width + 'px', height: details.head_schema.height + 'px', left: details.head_schema.coordinate_x + 'px', top: details.head_schema.coordinate_y + 'px'}">
+			:style="{ width: details.head_schema.width, height: details.head_schema.height, left: details.head_schema.coordinate_x, top: details.head_schema.coordinate_y}">
 			<!-- 头像 -->
 			<img class="position_a_view" :src="details.head_data.avatar"
-				:style="{ width: details.head_schema.avatar.width + 'px', height: details.head_schema.avatar.height + 'px', left: details.head_schema.avatar.coordinate_x + 'px', top: details.head_schema.avatar.coordinate_y + 'px', borderRadius: details.head_schema.avatar.radius + 'px'}">
+				:style="{ width: details.head_schema.avatar.width, height: details.head_schema.avatar.height, left: details.head_schema.avatar.coordinate_x, top: details.head_schema.avatar.coordinate_y, borderRadius: details.head_schema.avatar.radius}" @click="$router.push(`/editUserInfo`)">
 			<!-- 昵称 -->
 			<div class="position_a_view"
-				:style="{ width: details.head_schema.nickname.width + 'px', height: details.head_schema.nickname.height + 'px', left: details.head_schema.nickname.coordinate_x + 'px', top: details.head_schema.nickname.coordinate_y + 'px', textAlign: details.head_schema.nickname.text_align, fontSize: details.head_schema.nickname.size + 'px', color: details.head_schema.nickname.color}">
+				:style="{ width: details.head_schema.nickname.width, height: details.head_schema.nickname.height, left: details.head_schema.nickname.coordinate_x, top: details.head_schema.nickname.coordinate_y, textAlign: details.head_schema.nickname.text_align, fontSize: details.head_schema.nickname.size, color: details.head_schema.nickname.color}" @click="$router.push(`/editUserInfo`)">
 				{{ details.head_data.nickname }}
 			</div>
 			<!-- 描述 -->
 			<div class="position_a_view"
-				:style="{ width: details.head_schema.signature.width + 'px', height: details.head_schema.signature.height + 'px', left: details.head_schema.signature.coordinate_x + 'px', top: details.head_schema.signature.coordinate_y + 'px', textAlign: details.head_schema.signature.text_align, fontSize: details.head_schema.signature.size + 'px', color: details.head_schema.signature.color}">
+				:style="{ width: details.head_schema.signature.width, height: details.head_schema.signature.height, left: details.head_schema.signature.coordinate_x, top: details.head_schema.signature.coordinate_y, textAlign: details.head_schema.signature.text_align, fontSize: details.head_schema.signature.size, color: details.head_schema.signature.color}" @click="$router.push(`/editUserInfo`)">
 				{{ details.head_data.signature }}
 			</div>
 		</div>
 		<!-- 闪页中间链接 -->
+    <!-- TODO: 确实图标的宽高xy -->
     <div class="position_a_view"
-      :style="{ width: details.center_schema.width + 'px', height: details.center_schema.height + 'px', left: details.center_schema.coordinate_x + 'px', top: details.center_schema.coordinate_y + 'px'}"
+      :style="{ width: details.center_schema.width, height: details.center_schema.height, left: details.center_schema.coordinate_x, top: details.center_schema.coordinate_y}"
     >
-      <div class="center_btn_item" v-for="(item, index) in details.center_data" :key="index">
-        <img :src="item.image" alt="" :style="{  }">
-        <span>{{ item.content }}</span>
+      <div 
+        class="center_btn_item dfcen" v-for="(item, index) in details.center_data" :key="index"
+        :style="{ width: details.center_schema.button.width, height: details.center_schema.button.height, left: details.center_schema.button.coordinate_x, top: details.center_schema.button.coordinate_y, textAlign: details.center_schema.button.text_align, color: details.center_schema.color, marginBottom: details.center_schema.spacing}"
+        @click="$router.push('/editDetail')"
+      >
+        <img :src="item.image" alt="" :style="{ width: 48 + 'px' }">
+        <div class="flex">{{ item.content }}</div>
       </div>
     </div>
 		<!-- 闪页底部按钮 -->
+    <div class="position_r_view"
+      :style="{ width: details.bottom_schema.width, height: details.bottom_schema.height}"
+    >
+      <img :src="item.image" alt="" v-for="(item, index) in details.bottom_data" :key="index" :style="{ width: details.bottom_schema.icon.width, height: details.bottom_schema.icon.height, left: details.bottom_schema.icon.coordinate_x, top: details.bottom_schema.icon.coordinate_y}">
+    </div>
 	</div>
 </template>
 <script>
@@ -57,10 +67,8 @@
 	import memberPopup from "@/components/common/memberPopup.vue"
 	import cropper from "@/components/common/cropper";
 	import {
-		Popup
-	} from 'vant';
-	import {
-		mapState
+		mapState,
+    mapActions
 	} from "vuex"
 	export default {
 		components: {
@@ -74,9 +82,10 @@
 			})
 		},
 		mounted() {
-			console.log(this.details)
+      this.getShanDetail(this.$route.query.id)
 		},
 		methods: {
+      ...mapActions(['getShanDetail']),
 			handleClickOkey() {
 				console.log(1)
 			}

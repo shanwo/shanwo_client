@@ -5,7 +5,7 @@ const homeApi = {
   getHot: `home/hot`, // 首页 - 热门
 };
 const myShan = {
-  pageInfo: "page/info?id=14",
+  templateInfo: "template/info",
 };
 
 

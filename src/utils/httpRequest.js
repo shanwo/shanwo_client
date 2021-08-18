@@ -14,39 +14,37 @@ http.__proto__ = axios;
  * 请求拦截
  */
 http.interceptors.request.use(
-    config => {
-        config.headers.sn = new Date().getTime();
-        config.headers.token = sessionStorage.getItem("unionId");
-        // config.headers.unionId = "o86GNwfImF03Tbs_uWsYCM54xnD4";
+  (config) => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
 
-        return config;
-    },
-    error => {
-        return Promise.reject(error);
-    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
 /**
  * 响应拦截
  */
 http.interceptors.response.use(
-    response => {
-        if (response.data.code && response.data.code !== 200) {
-            let msg = response.data.msg;
-            Toast(msg);
-        }
-        return response;
-    },
-    error => {
-        return Promise.reject(error);
+  (response) => {
+    if (response.data.code && response.data.code !== 200) {
+      let msg = response.data.msg;
+      Toast(msg);
     }
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
 /**
  * 请求地址处理
  */
-http.adornUrl = actionName => {
-    return baseURL.apiURL + actionName;
+http.adornUrl = (actionName) => {
+  return baseURL.apiURL + actionName;
 };
 
 /**
@@ -61,22 +59,21 @@ http.adornUrl = actionName => {
  */
 
 const myAjax = (reqUrl, reqMethod, reqData, callback, dir) => {
-    http({
-            url: http.adornUrl(reqUrl),
-            method: reqMethod,
-            data: reqData
-						
-        })
-        .then(({ data }) => {
-            if (dir) {
-                callback(data);
-            } else if (data && data.code == 200) {
-                callback(data.data);
-            } else {
-                Toast(data.msg);
-            }
-        })
-        .catch(({ data }) => {});
+  http({
+    url: http.adornUrl(reqUrl),
+    method: reqMethod,
+    data: reqData,
+  })
+    .then(({ data }) => {
+      if (dir) {
+        callback(data);
+      } else if (data && data.code == 200) {
+        callback(data.data);
+      } else {
+        Toast(data.msg);
+      }
+    })
+    .catch(({ data }) => {});
 };
 const myAjax2 = (reqUrl, reqData, reqHeader, callback) => {
     http({

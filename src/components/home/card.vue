@@ -35,7 +35,7 @@
 		},
     methods: {
       toDetail(item) {
-        this.$router.push(`/shanDetail?sort_id=${item.id}`)
+        this.$router.push(`/shanDetail?id=${item.id}`)
       }
     }
   }
