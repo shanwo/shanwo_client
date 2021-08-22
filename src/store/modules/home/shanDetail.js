@@ -17,7 +17,7 @@ const shanDetail = {
         avatar: {
           width: "88",
           height: "88",
-          coordinate_x: "123",
+          coordinate_x: "124",
           coordinate_y: "12",
           radius: "44",
         },
