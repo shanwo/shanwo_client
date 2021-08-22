@@ -1,16 +1,11 @@
 
 
 <template>
-  <div class="templates">
-    <van-tabs v-model="active" swipeable sticky title-active-color="#333333" title-inactive-color="#9B9B9B">
-      <van-tab title="热门">
+  <div class="templates" v-if="this.templates">
+    <van-tabs v-model="active" swipeable sticky title-active-color="#333333" title-inactive-color="#9B9B9B" @change="getTemplates">
+      <van-tab v-for="(item, index) in templates.sort" :title="item.name" :key="item.id">
         <div class="list">
-          <template-item v-for="(item, i) in 10" :key="i"></template-item>
-        </div>
-      </van-tab>
-      <van-tab title="最近更新">
-        <div class="list">
-          <template-item v-for="(item, i) in 10" :key="i"></template-item>
+          <template-item v-for="(itemTemplate, indexTemplate) in item.list" :key="indexTemplate" :templateInfo="itemTemplate"></template-item>
         </div>
       </van-tab>
     </van-tabs>
@@ -27,9 +22,27 @@
     },
     data() {
       return {
-        active: 0
+        active: 0,
+				templates: null
       }
-    }
+    },
+		mounted() {
+			this.getTemplates()
+		},
+		methods: {
+			// 获取模板列表
+			getTemplates() {
+				let sort_id = this.templates ? this.templates.sort[this.active].id : ''
+				this.$myAjax(`${this.$api.getTemplateList}?sort_id=${sort_id}`, "GET", {}, (res) => {
+					if(this.active == 0) {
+						this.templates = res
+					}
+					if(!this.templates.list) {
+						this.templates.sort[this.active].list = res.lists
+					}
+				});
+			}
+		}
   }
 </script>
 <style lang="less">

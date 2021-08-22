@@ -20,8 +20,6 @@ module.exports = {
 		config.module
 			.rule('vue')
 			.test(/\.vue$/)
-			.use('style-rem-loader')
-				.loader('style-rem-loader')
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {

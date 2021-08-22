@@ -48,6 +48,7 @@
 </template>
 <script>
 import Header from "@/components/common/header.vue"
+import { mapState } from "vuex";
   export default {
     data() {
       return {
@@ -55,6 +56,11 @@ import Header from "@/components/common/header.vue"
         des: ''
       }
     },
+		computed: {
+		  ...mapState({
+		    details: (state) => state.shanDetail.details,
+		  }),
+		},
     components: {
       Header
     }
@@ -64,6 +70,8 @@ import Header from "@/components/common/header.vue"
 .edit_head {
   min-height: 100vh;
   background: #F6F7F9;
+	padding-top: 100px;
+	box-sizing: border-box;
   .save_btn {
     background: linear-gradient(323deg, #00A89C 0%, #93D2CD 100%);
     width: 68px;

@@ -1,16 +1,19 @@
 <template>
   <div>
   	<div class="template_item" @click="previewTemplate">
-  	  <img src="@/assets/images/home/default.png" class="default_img" alt="">
+			<!-- 默认区域 -->
+  	  <!-- <img src="@/assets/images/home/default.png" class="default_img" alt=""> -->
+			<!-- 模板图片 -->
+			<img :src="templateInfo.preview" class="template_img">
   	  <!-- 会员 -->
-  	  <div class="vip_view dfcen">
+  	  <div class="vip_view dfcen" v-if="templateInfo.type == 2">
   	    <span>会员</span>
   	    <img src="@/assets/images/home/tip.png" alt="">
   	  </div>
   	</div>
   	<van-popup v-model="show" round>
   	  <div class="popup_container dfcen">
-  	    <img :src="templateUrl">
+  	    <img :src="templateInfo.preview">
   	  </div>
   	</van-popup>
 		
@@ -18,7 +21,7 @@
 		  <div class="back_view dfcen" @click="show=false">
 		    <img src="@/assets/images/public/back.png" alt="" />
 		  </div>
-		  <div class="use_view dfcen" @click="$router.push('/editShan')">使用模板</div>
+		  <div class="use_view dfcen" @click="toEditTemplate">使用模板</div>
 		</div>
 		
   </div>
@@ -26,10 +29,15 @@
 <script type="text/javascript">
 	import { Popup } from 'vant';
 	export default {
+		props: {
+			templateInfo: {
+				type: Object,
+				default: {}
+			}
+		},
 		data() {
 			return {
 				show: false,
-				templateUrl: 'https://desk-calenda.oss-cn-beijing.aliyuncs.com/static-h5/%E5%90%AF%E5%8A%A8%E9%A1%B5%202@2x%20(2)%20(1).png'
 			}
 		},
 		components: {
@@ -37,8 +45,13 @@
 		},
 		methods: {
 			previewTemplate() {
-				console.log(123)
-				this.show = true
+				this.show = !this.show
+			},
+			toEditTemplate() {
+				this.previewTemplate()
+				setTimeout(() => {
+					this.$router.push(`/editShan?id=${this.templateInfo.id}`)
+				})
 			}
 		}
 	}
@@ -48,8 +61,14 @@
   margin: 8px 4px;
   width: 174px;
   height: 312px;
-  background: #ccc;
   position: relative;
+	.template_img {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
   .default_img {
     width: 100%;
     height: 32px;
