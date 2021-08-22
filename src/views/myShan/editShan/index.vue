@@ -45,9 +45,11 @@
 			<img class="edit_img" src="@/assets/images/home/xiugai1@2x.png" >
 		</div>
 		<!-- 闪页底部按钮 -->
-		<div class="position_r_view edit_border dfcen" :class="test" :style="{ height: details.bottom_schema.height / 37.5 + 'rem'}">
-			<img :src="item.image" alt="" v-for="(item, index) in details.bottom_data" :key="index"
-				:style="{ width: details.bottom_schema.icon.width / 37.5 + 'rem', height: details.bottom_schema.icon.height / 37.5 + 'rem', left: details.bottom_schema.icon.coordinate_x / 37.5 + 'rem', top: details.bottom_schema.icon.coordinate_y / 37.5 + 'rem', marginLeft: details.bottom_schema.spacing / 37.5 / 2 + 'rem', marginRight: details.bottom_schema.spacing / 37.5 / 2 + 'rem'}">
+		<div class="position_r_view edit_border bottom_icon_view" :style="{ height: details.bottom_schema.height / 37.5 + 'rem'}">
+			<div class="bottom_icons">
+				<img :src="item.image" alt="" v-for="(item, index) in details.bottom_data" :key="index"
+					:style="{ width: details.bottom_schema.icon.width / 37.5 + 'rem', height: details.bottom_schema.icon.height / 37.5 + 'rem', left: details.bottom_schema.icon.coordinate_x / 37.5 + 'rem', top: details.bottom_schema.icon.coordinate_y / 37.5 + 'rem', marginLeft: details.bottom_schema.spacing / 37.5 / 2 + 'rem', marginRight: details.bottom_schema.spacing / 37.5 / 2 + 'rem'}">
+			</div>
 			<!-- 编辑按钮 -->
 			<img class="edit_img" src="@/assets/images/home/xiugai1@2x.png" >
 		</div>
@@ -61,8 +63,7 @@
 	export default {
 		data() {
 			return {
-				pageDatas: {},
-				test: ''
+				pageDatas: {}
 			}
 		},
 		computed: {
@@ -94,6 +95,7 @@
 		padding: 40px 24px 0;
 		box-sizing: border-box;
 		.edit_border {
+			display: flex;
 			border: 1px dashed #FF4444;
 			margin-bottom: 10px;
 			.edit_img {
@@ -103,6 +105,13 @@
 				right: -14px;
 				bottom: 50%;
 				transform: translate(0, 50%);
+			}
+		}
+		.bottom_icon_view {
+			.bottom_icons {
+				overflow-x: scroll;
+				width: 100%;
+				display: flex;
 			}
 		}
 	}
