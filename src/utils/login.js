@@ -1,7 +1,7 @@
 import wx from "weixin-js-sdk";
 
 import baseURL from "@/api/env.js";
-import { homeApi } from "@/api/api";
+import {homeApi} from "@/api/api";
 import httpRequest from "@/utils/httpRequest";
 
 // 解析浏览器传参
@@ -110,13 +110,13 @@ export const wxConfigItems = (
         });
         wx.checkJsApi({
             jsApiList: ["chooseImage"], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function(res) {
+            success: function (res) {
                 // 以键值对的形式返回，可用的api值true，不可用为false
                 // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
             }
         });
         // 校验完成后出发
-        wx.ready(function(res) {
+        wx.ready(function (res) {
             setTimeout(() => {
                 // 默认隐藏所有
                 wx.hideOptionMenu("hideOptionMenu");
@@ -161,7 +161,7 @@ export const wxConfigItems = (
                     // 分享好友
                     wx.onMenuShareAppMessage({
                         ...shareCt,
-                        success: function(res) {
+                        success: function (res) {
                             if (callback) {
                                 callback();
                             }
@@ -171,24 +171,24 @@ export const wxConfigItems = (
                     //   分享到朋友圈接口
                     wx.onMenuShareTimeline({
                         ...shareCt,
-                        success: function() {
+                        success: function () {
                             //给用户添加1次抽奖机会
                             if (callback) {
                                 callback();
                             }
                         },
                         //用户取消分享后执行的回调函数
-                        cancel: function() {
+                        cancel: function () {
                             console.log("分享朋友圈----取消分享");
                         }
                     });
                 }
             }, 10);
         });
-        wx.error(function(res) {
+        wx.error(function (res) {
             console.log("失败==", res);
         });
     });
 };
 
-export { getUrlParam, checkLogin };
+export {getUrlParam, checkLogin};

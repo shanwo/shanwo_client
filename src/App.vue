@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive v-if="$route.meta.keepAlive">
-      <router-view />
+      <router-view/>
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
     <!-- <router-view ></router-view> -->
@@ -23,7 +23,7 @@ export default {
   methods: {
     reload() {
       this.isRouterAlive = false;
-      this.$nextTick(function() {
+      this.$nextTick(function () {
         this.isRouterAlive = true;
       });
     }

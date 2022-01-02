@@ -22,10 +22,11 @@ Vue.config.productionTip = false;
 
 // 所有接口api
 import apis from "@/api/api.js";
+
 Vue.prototype.$api = apis;
 
-window.onpopstate =function(){
-    Vue.isBack=true;
+window.onpopstate = function () {
+    Vue.isBack = true;
     console.log('页面触发返回按钮', Vue.isBack)
 }
 
@@ -40,9 +41,9 @@ sessionStorage.setItem("userId", "9");
 // sessionStorage.setItem("userId", "1");
 
 router.beforeEach((to, from, next) => {
-	
-	Vue.isBack=false;
-	
+
+    Vue.isBack = false;
+
     document.title = to.meta.title || "首页";
     const code = getUrlParam("code"); //获取浏览器登录时需要得code
 
@@ -73,30 +74,30 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.mixin({
-    beforeRouteLeave: function(to, from, next) {
-			let tabbars = []
-			if(Vue.isBack && !tabbars.includes(from.fullPath)) { // 判断是返回上一页 并且不是底部按钮
-				let vnode = this.$vnode
-				var key = vnode.key == null ? vnode.componentOptions.Ctor.cid + (vnode.componentOptions.tag ? `::${vnode.componentOptions.tag}` : "") : vnode.key;
-				let cache = vnode.parent.componentInstance.cache
-				let keys = vnode.parent.componentInstance.keys
-				var index = keys.indexOf(key);
-				if (cache[key]) {
-						if (keys.length) {
-								var index = keys.indexOf(key);
-								if (index > -1) {
-										keys.splice(index, 1);
-								}
-						}
-						delete cache[key];
-				}
-			}
-      next()
+    beforeRouteLeave: function (to, from, next) {
+        let tabbars = []
+        if (Vue.isBack && !tabbars.includes(from.fullPath)) { // 判断是返回上一页 并且不是底部按钮
+            let vnode = this.$vnode
+            var key = vnode.key == null ? vnode.componentOptions.Ctor.cid + (vnode.componentOptions.tag ? `::${vnode.componentOptions.tag}` : "") : vnode.key;
+            let cache = vnode.parent.componentInstance.cache
+            let keys = vnode.parent.componentInstance.keys
+            var index = keys.indexOf(key);
+            if (cache[key]) {
+                if (keys.length) {
+                    var index = keys.indexOf(key);
+                    if (index > -1) {
+                        keys.splice(index, 1);
+                    }
+                }
+                delete cache[key];
+            }
+        }
+        next()
     }
-  })
+})
 
 new Vue({
     router,
-		store,
+    store,
     render: h => h(App)
 }).$mount("#app");

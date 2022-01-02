@@ -1,7 +1,7 @@
 <template>
-	<div class="guide_container">
-		详情
-	</div>
+  <div class="guide_container">
+    详情
+  </div>
 </template>
 
 <script>
